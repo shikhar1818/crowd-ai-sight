@@ -2,41 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* AI Crowd Management Design System - Futuristic Tech Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors */
+    --background: 221 39% 11%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 221 39% 11%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 38% 15%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* AI Tech Primary - Deep Navy */
+    --primary: 220 38% 15%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Tech Secondary - Lighter Navy */
+    --secondary: 219 30% 18%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted States */
+    --muted: 219 30% 18%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Neon Green Accent */
+    --accent: 145 63% 42%;
+    --accent-foreground: 220 38% 15%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Destructive */
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders and Inputs */
+    --border: 219 30% 18%;
+    --input: 219 30% 18%;
+    --ring: 145 63% 42%;
 
-    --radius: 0.5rem;
+    /* AI Theme Extensions */
+    --tech-blue: 214 84% 56%;
+    --tech-cyan: 189 85% 54%;
+    --tech-purple: 263 70% 60%;
+    --neon-green: 145 63% 42%;
+    --neon-blue: 214 84% 56%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--tech-blue)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--neon-green)), hsl(var(--tech-cyan)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--primary)), hsl(var(--tech-blue)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--muted)));
+    
+    /* Shadows and Effects */
+    --shadow-neon: 0 0 20px hsl(var(--neon-green) / 0.3);
+    --shadow-tech: 0 8px 32px hsl(var(--tech-blue) / 0.2);
+    --shadow-card: 0 4px 16px hsl(var(--primary) / 0.3);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s ease-out;
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +127,123 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
+}
+
+@layer components {
+  /* AI Tech Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-accent to-[hsl(var(--tech-cyan))] text-accent-foreground font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-[var(--shadow-neon)] hover:scale-105;
+  }
+  
+  .btn-tech {
+    @apply bg-gradient-to-r from-[hsl(var(--tech-blue))] to-[hsl(var(--tech-purple))] text-primary-foreground font-medium px-6 py-3 rounded-lg transition-all duration-300 hover:shadow-[var(--shadow-tech)] hover:scale-105;
+  }
+
+  /* Card Variants */
+  .card-tech {
+    @apply bg-[var(--gradient-card)] border border-border/50 rounded-xl p-6 transition-all duration-300 hover:shadow-[var(--shadow-card)] hover:scale-105 hover:border-accent/50;
+  }
+
+  /* Text Effects */
+  .text-glow {
+    @apply text-accent drop-shadow-[0_0_8px_hsl(var(--neon-green)/0.6)];
+  }
+
+  .text-tech-gradient {
+    @apply bg-gradient-to-r from-[hsl(var(--tech-blue))] to-[hsl(var(--neon-green))] bg-clip-text text-transparent;
+  }
+
+  /* Animated Background */
+  .bg-animated {
+    background: var(--gradient-hero);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  /* Particle Effect Container */
+  .particles-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .particles-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 25% 25%, hsl(var(--neon-green)/0.1) 1px, transparent 1px),
+                      radial-gradient(circle at 75% 75%, hsl(var(--tech-blue)/0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: particleFloat 10s linear infinite;
+  }
+}
+
+@layer utilities {
+  /* Custom Keyframes */
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes particleFloat {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-100px); }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Animation Classes */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+
+  /* Staggered Animation Delays */
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
 }
